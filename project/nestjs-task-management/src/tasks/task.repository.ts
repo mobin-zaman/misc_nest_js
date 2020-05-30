@@ -27,6 +27,8 @@ export class TaskRepository extends Repository<Task> {
         const { status, search } = filterDto;
         const query = this.createQueryBuilder('task');
 
+        query.where('task.userId = :userId', {userId: user.id});
+
         if(status) {
             query.andWhere('task.status = :status', {status: status});
         }
